@@ -67,7 +67,7 @@
       <artifactId>hibernate-validator</artifactId>
       <version>6.2.3.Final</version>
     </dependency>
-<!--    DB Connection 관리 라이버러리-->
+<!--    DB Connection Pool 라이버러리-->
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-dbcp2</artifactId>
