@@ -90,6 +90,12 @@
       <artifactId>querydsl-jpa</artifactId>
       <version>5.0.0</version>
     </dependency>
+<!--    thymeleaf 사용-->
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring5</artifactId>
+      <version>3.1.1.RELEASE</version>
+    </dependency>
 
     <dependency>
       <groupId>ch.qos.logback</groupId>
