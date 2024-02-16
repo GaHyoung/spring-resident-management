@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
@@ -29,6 +30,5 @@ public class CertificateIssue {
     private String certificateTypeCode; //증명서유형코드
 
     @Column(name = "certificate_issue_date")
-    @Temporal(TemporalType.DATE)
-    private Calendar certificateIssueDate; //증명서발급일자
+    private LocalDate certificateIssueDate; //증명서발급일자
 }

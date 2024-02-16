@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
@@ -26,8 +27,7 @@ public class Household {
     private Resident resident; //세대주주민일련번호
 
     @Column(name = "household_composition_date")
-    @Temporal(TemporalType.DATE)
-    private Calendar householdCompositionDate; //세대구성일자
+    private LocalDate householdCompositionDate; //세대구성일자
 
     @Column(name = "household_composition_reason_code")
     private String householdCompositionReasonCode; //세대구성사유코드

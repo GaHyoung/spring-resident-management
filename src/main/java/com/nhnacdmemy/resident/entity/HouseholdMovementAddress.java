@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
@@ -41,9 +42,7 @@ public class HouseholdMovementAddress {
     @NoArgsConstructor
     public static class Pk implements Serializable{
         @Column(name = "house_movement_report_date")
-        @Temporal(TemporalType.DATE)
-        private Calendar houseMovementReportDate; //전입신고일자
-        @Column(name = "household_serial_number")
+        private LocalDate houseMovementReportDate; //전입신고일자
         private Integer householdSerialNumber; //세대일련번호
 
     }

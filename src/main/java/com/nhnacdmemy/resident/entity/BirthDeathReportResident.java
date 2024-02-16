@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
@@ -28,8 +29,7 @@ public class BirthDeathReportResident {
 
 
     @Column(name = "birth_death_report_date")
-    @Temporal(TemporalType.DATE)
-    private Calendar birthDeathReportDate; //출생사망신고일자
+    private LocalDate birthDeathReportDate; //출생사망신고일자
 
     @Column(name = "birth_report_qualifications_code")
     private String birthReportQualificationsCode; //출생신고자격코드

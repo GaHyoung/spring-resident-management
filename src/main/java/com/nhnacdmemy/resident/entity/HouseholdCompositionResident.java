@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
@@ -33,8 +34,7 @@ public class HouseholdCompositionResident {
 
 
     @Column(name = "report_date")
-    @Temporal(TemporalType.DATE)
-    private Calendar reportDate; //신고일자
+    private LocalDate reportDate; //신고일자
 
     @Column(name = "household_relationship_code")
     private String householdRelationshipCode; //세대주관계코드
@@ -49,9 +49,7 @@ public class HouseholdCompositionResident {
     @EqualsAndHashCode
     @NoArgsConstructor
     public static class Pk implements Serializable{
-        @Column(name = "household_serial_number")
         private Integer householdSerialNumber; //세대일련번호
-        @Column(name = "resident_serial_number")
         private Integer residentSerialNumber; //주민일련번호
     }
 

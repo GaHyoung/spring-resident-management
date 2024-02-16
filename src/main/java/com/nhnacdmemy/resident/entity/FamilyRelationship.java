@@ -38,7 +38,6 @@ public class FamilyRelationship {
     public static class Pk implements Serializable{
         @Column(name = "family_resident_serial_number")
         private Integer familyResidentSerialNumber; //가족주민일련번호
-        @Column(name = "base_resident_serial_number")
         private Integer baseResidentSerialNumber; //기준주민일련번호
     }
 }
