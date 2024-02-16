@@ -20,6 +20,7 @@ public class CertificateIssue {
     @Column(name = "certificate_confirmation_number")
     private long certificateConfirmationNumber; //증명서확인번호
 
+
     @ManyToOne
     @JoinColumn(name = "resident_serial_number")
     private Resident resident; //주민일련번호
