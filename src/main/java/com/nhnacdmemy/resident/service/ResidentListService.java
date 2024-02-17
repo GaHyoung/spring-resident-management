@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class ResidetListService {
+public class ResidentListService {
     private final ResidentRepository residentRepository;
 
     @Autowired
-    public ResidetListService(ResidentRepository residentRepository) {
+    public ResidentListService(ResidentRepository residentRepository) {
         this.residentRepository = residentRepository;
     }
 
