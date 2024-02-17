@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class ResidentListService {
@@ -15,6 +17,10 @@ public class ResidentListService {
     @Autowired
     public ResidentListService(ResidentRepository residentRepository) {
         this.residentRepository = residentRepository;
+    }
+
+    public List<Resident> getAllResidents(){
+        return residentRepository.findAll();
     }
 
     public Resident saveResident(Resident resident){
@@ -41,6 +47,10 @@ public class ResidentListService {
         log.info("{} resident update", existResident.getName());
 
         return updatedResident;
+    }
+
+    public void deleteResident(int serialNumber){
+        residentRepository.deleteById(serialNumber);
     }
 
 }

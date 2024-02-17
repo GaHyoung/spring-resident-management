@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Resident Management</title>
+</head>
+<body>
+<h2>주민 목록</h2>
+<table>
+    <thead>
+    <tr>
+        <th>주민 식별 번호</th>
+        <th>이름</th>
+        <th>주민번호</th>
+        <th>성별코드</th>
+        <th>출생일시</th>
+        <th>수정</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="resident : ${residents}">
+        <td th:text="${resident.residentSerialNumber}">Resident Serial Number</td>
+        <td th:text="${resident.name}">Name</td>
+        <td th:text="${resident.residentRegistrationNumber}">Resident Registration Number</td>
+        <td th:text="${resident.genderCode}">Gender</td>
+        <td th:text="${resident.birthDate}">Birth Date</td>
+        <td>
+            <a th:href="@{/residents/{id}/edit(id=${resident.residentSerialNumber})}">수정</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/residents/add}">등록</a>
+</body>
+</html>

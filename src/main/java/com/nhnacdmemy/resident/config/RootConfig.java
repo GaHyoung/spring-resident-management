@@ -1,7 +1,6 @@
 package com.nhnacdmemy.resident.config;
 
 import com.nhnacdmemy.resident.Base;
-import com.nhnacdmemy.resident.properties.DatabaseProperties;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

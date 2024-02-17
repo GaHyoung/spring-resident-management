@@ -5,7 +5,11 @@ import com.nhnacdmemy.resident.service.ResidentListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/residents")
@@ -16,6 +20,14 @@ public class ResidentListController {
     @Autowired
     public ResidentListController(ResidentListService residentListService) {
         this.residentListService = residentListService;
+    }
+
+    @GetMapping
+    public ModelAndView getAllResidents() {
+        ModelAndView modelAndView = new ModelAndView("residents");
+        List<Resident> residents = residentListService.getAllResidents();
+        modelAndView.addObject("residents", residents);
+        return modelAndView;
     }
 
     //@RequestBody를 사용하여 요청 본문의 JSON 데이터를 Resident 객체로 매핑
@@ -33,6 +45,14 @@ public class ResidentListController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(updatedResident);
+    }
+
+    @DeleteMapping("/{serialNumber}")
+    public ResponseEntity<String> deleteResident(@PathVariable int serialNumber) {
+        residentListService.deleteResident(serialNumber);
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .body("Resident with serial number " + serialNumber + " has been deleted successfully.");
     }
 
 }
