@@ -1,79 +1,79 @@
+
 -- 1. 기존 테이블 삭제
-drop table resident;
-drop table birth_death_report_resident;
-drop table family_relationship;
-drop table household;
-drop table household_movement_address;
-drop table household_composition_resident;
-drop table certificate_issue;
+drop table if exists certificate_issue;
+drop table if exists household_composition_resident;
+drop table if exists household_movement_address;
+drop table if exists household;
+drop table if exists family_relationship;
+drop table if exists birth_death_report_resident;
+drop table if exists resident;
 
 
 -- 2. 테이블 생성
-create table resident
+create table if not exists resident
 (
-    resident_serial_number       int(11)      not null,
+    resident_serial_number       int not null,
     name                         varchar(100) not null,
     resident_registration_number varchar(300) not null,
-    gender_code                  varchar(20)  not null,
-    birth_date                   datetime     not null,
-    birth_place_code             varchar(20)  not null,
+    gender_code                  varchar(20) not null,
+    birth_date                   timestamp not null,
+    birth_place_code             varchar(20) not null,
     registration_base_address    varchar(500) not null,
-    death_date                   datetime     null,
-    death_place_code             varchar(20)  null,
+    death_date                   timestamp null,
+    death_place_code             varchar(20) null,
     death_place_address          varchar(500) null,
     primary key (resident_serial_number)
 );
 
-create table birth_death_report_resident
+create table if not exists birth_death_report_resident
 (
+    resident_serial_number           int not null,
     birth_death_type_code            varchar(20) not null,
-    report_resident_serial_number    int(11)     not null,
-    resident_serial_number           int(11)     not null,
-    birth_death_report_date          date        not null,
+    report_resident_serial_number    int not null,
+    birth_death_report_date          date not null,
     birth_report_qualifications_code varchar(20) null,
     death_report_qualifications_code varchar(20) null,
     email_address                    varchar(50) null,
     phone_number                     varchar(20) not null,
     primary key (birth_death_type_code, report_resident_serial_number, resident_serial_number),
     foreign key (resident_serial_number) references resident(resident_serial_number)
-
 );
 
-create table family_relationship
+create table  if not exists family_relationship
 (
-    base_resident_serial_number   int(11)     not null,
-    family_resident_serial_number int(11)     not null,
+    base_resident_serial_number   int not null,
+    family_resident_serial_number int not null,
     family_relationship_code      varchar(20) not null,
-    primary key (base_resident_serial_number, family_resident_serial_number),
+    primary key (family_resident_serial_number, base_resident_serial_number),
     foreign key (base_resident_serial_number) references resident(resident_serial_number)
 );
 
-create table household
+create table  if not exists household
 (
-    household_serial_number           int(11)      not null,
-    household_resident_serial_number  int(11)      not null,
-    household_composition_date        date         not null,
-    household_composition_reason_code varchar(20)  not null,
+    household_serial_number           int not null,
+    household_resident_serial_number  int not null,
+    household_composition_date        date not null,
+    household_composition_reason_code varchar(20) not null,
     current_house_movement_address    varchar(500) not null,
     primary key (household_serial_number),
     foreign key (household_resident_serial_number) references resident(resident_serial_number)
 );
 
-create table household_movement_address
+create table  if not exists household_movement_address
 (
-    household_serial_number    int(11)      not null,
-    house_movement_report_date date         not null,
+    household_serial_number    int not null,
+    house_movement_report_date date not null,
     house_movement_address     varchar(500) not null,
-    last_address_yn            varchar(1)   default 'Y' not null,
-    primary key (household_serial_number, house_movement_report_date),
+    last_address_yn            varchar(1) default 'Y' not null,
+    primary key (house_movement_report_date, household_serial_number),
     foreign key (household_serial_number) references household(household_serial_number)
 );
 
-create table household_composition_resident
+create table  if not exists household_composition_resident
 (
-    household_serial_number                  int(11)     not null,
-    resident_serial_number                   int(11)     not null,
-    report_date                              date        not null,
+    household_serial_number                  int not null,
+    resident_serial_number                   int not null,
+    report_date                              date not null,
     household_relationship_code              varchar(20) not null,
     household_composition_change_reason_code varchar(20) not null,
     primary key (household_serial_number, resident_serial_number),
@@ -81,25 +81,24 @@ create table household_composition_resident
     foreign key (resident_serial_number) references resident(resident_serial_number)
 );
 
-create table certificate_issue
+create table  if not exists certificate_issue
 (
-    certificate_confirmation_number bigint      not null,
-    resident_serial_number          int         not null,
+    certificate_confirmation_number bigint not null,
+    resident_serial_number          int not null,
     certificate_type_code           varchar(20) not null,
-    certificate_issue_date          date        not null,
+    certificate_issue_date          date not null,
     primary key (certificate_confirmation_number),
     foreign key (resident_serial_number) references resident(resident_serial_number)
 );
 
-
 -- 3. resident 테이블 데이터 추가
-insert into resident values(1, '남길동', '130914-*******', '남', '19130914072200', '자택', '경기도 성남시 분당구 대왕판교로645번길', '20210429090300', '주택', '강원도 고성군 금강산로 290번길');
-insert into resident values(2, '남석환', '540514-*******', '남', '19540514173000', '병원', '경기도 성남시 분당구 대왕판교로645번길', null, null, null);
-insert into resident values(3, '박한나', '551022-*******', '여', '19551022111500', '병원', '서울특별시 중구 세종대로 110번길', null, null, null);
-insert into resident values(4, '남기준', '790510-*******', '남', '19790510204500', '병원', '경기도 성남시 분당구 대왕판교로645번길', null, null, null);
-insert into resident values(5, '이주은', '820821-*******', '여', '19820821012800', '병원', '경기도 수원시 팔달구 효원로 1번길', null, null, null);
-insert into resident values(6, '이선미', '851205-*******', '여', '19851205220100', '병원', '경기도 수원시 팔달구 효원로 1번길', null, null, null);
-insert into resident values(7, '남기석', '120315-*******', '남', '20120315145900', '병원', '경기도 성남시 분당구 대왕판교로645번길', null, null, null);
+insert into resident values(1, '남길동', '130914-*******', '남', '1913-09-14 07:22:00', '자택', '경기도 성남시 분당구 대왕판교로645번길', '2021-04-29 09:03:00', '주택', '강원도 고성군 금강산로 290번길');
+insert into resident values(2, '남석환', '540514-*******', '남', '1954-05-14 17:30:00', '병원', '경기도 성남시 분당구 대왕판교로645번길', null, null, null);
+insert into resident values(3, '박한나', '551022-*******', '여', '1955-10-22 11:15:00', '병원', '서울특별시 중구 세종대로 110번길', null, null, null);
+insert into resident values(4, '남기준', '790510-*******', '남', '1979-05-10 20:45:00', '병원', '경기도 성남시 분당구 대왕판교로645번길', null, null, null);
+insert into resident values(5, '이주은', '820821-*******', '여', '1982-08-21 01:28:00', '병원', '경기도 수원시 팔달구 효원로 1번길', null, null, null);
+insert into resident values(6, '이선미', '851205-*******', '여', '1985-12-05 22:01:00', '병원', '경기도 수원시 팔달구 효원로 1번길', null, null, null);
+insert into resident values(7, '남기석', '120315-*******', '남', '2012-03-15 14:59:00', '병원', '경기도 성남시 분당구 대왕판교로645번길', null, null, null);
 
 commit;
 
@@ -173,14 +172,14 @@ where A.resident_serial_number = 4;
 
 select '본인'
      , name
-     , date_format(birth_date, '%Y년 %m월 %d일')
+     , FORMATDATETIME(birth_date, '%Y년 %m월 %d일')
      , gender_code
 from resident
 where resident_serial_number = 4
 union all
 select A.family_relationship_code
      , B.name
-     , date_format(B.birth_date, '%Y년 %m월 %d일')
+     , FORMATDATETIME(B.birth_date, '%Y년 %m월 %d일')
      , B.gender_code
 from family_relationship A
          inner join resident B
@@ -190,7 +189,7 @@ where A.base_resident_serial_number = 4;
 
 -- 11. 주민등록등본 조회SQL
 select A.certificate_type_code
-     , concat(substr(A.certificate_confirmation_number, 1, 8), '-', substr(A.certificate_confirmation_number, 9, 8))
+     , concat(SUBSTRING(A.certificate_confirmation_number, 1, 8), '-', SUBSTRING(A.certificate_confirmation_number, 9, 8))
      , D.name
      , C.household_composition_reason_code
      , C.household_composition_date

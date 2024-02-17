@@ -3,7 +3,7 @@ POST http://localhost:8080/residents
 Content-Type: application/json
 
 {
-  "residentSerialNumber": 1,
+  "residentSerialNumber": 100,
   "name": "김씨",
   "residentRegistrationNumber": "123456-0000000",
   "genderCode": "M",
@@ -15,13 +15,13 @@ Content-Type: application/json
   "deathPlaceAddress": null
 }
 
-###업데이트
+###수정
 
-PUT http://localhost:8080/residents/123
+PUT http://localhost:8080/residents/100
 Content-Type: application/json
 
 {
-  "residentSerialNumber": 1,
+  "residentSerialNumber": 100,
   "name": "김씨",
   "residentRegistrationNumber": "123456-0000000",
   "genderCode": "M",

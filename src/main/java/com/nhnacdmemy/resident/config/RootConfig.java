@@ -24,12 +24,12 @@ public class RootConfig {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setUrl("jdbc:h2:~/spring-jpa;DATABASE_TO_UPPER=false;MODE=LEGACY;"
-                + "INIT=RUNSCRIPT FROM 'classpath:/script/schema.sql'");
+                + "INIT=RUNSCRIPT FROM 'classpath:/script/resident.sql'");
         dataSource.setUsername("sa");
         dataSource.setPassword("");
 
         dataSource.setInitialSize(10);
-        dataSource.setMaxTotal(100);
+        dataSource.setMaxTotal(10);
         dataSource.setMinIdle(10);
         dataSource.setMaxIdle(10);
 
