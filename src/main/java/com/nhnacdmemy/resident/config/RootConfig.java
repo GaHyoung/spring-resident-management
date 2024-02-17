@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 /**
  * DBCP2의 BasicDataSource를 사용하여 H2 DB에 연결.
- * BasicDataSource를 통해 데이터베이스 연결 풀의 크기 및 대기시간 등을 설정.
+ * BasicDataSource를 통해 데이터베이스 연결 풀의 크기 및 대기시간 등을 설정
  * */
 
 @Configuration
