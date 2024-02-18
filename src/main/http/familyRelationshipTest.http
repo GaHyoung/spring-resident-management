@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### 가족관계 수정
-PUT http://localhost:8080/residents/{serialNumber}/relationship/{familySerialNumber}
+PUT http://localhost:8080/residents/1/relationship/2
 Content-Type: application/json
 
 {
@@ -16,4 +16,4 @@ Content-Type: application/json
 }
 
 ### 가족관계 삭제
-DELETE http://localhost:8080/residents/{serialNumber}/relationship/{familySerialNumber}
+DELETE http://localhost:8080/residents/1/relationship/2

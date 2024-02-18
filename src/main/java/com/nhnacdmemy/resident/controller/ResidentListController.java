@@ -1,7 +1,7 @@
 package com.nhnacdmemy.resident.controller;
 
 import com.nhnacdmemy.resident.entity.Resident;
-import com.nhnacdmemy.resident.service.ResidentListService;
+import com.nhnacdmemy.resident.service.impl.ResidentListServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +14,10 @@ import java.util.List;
 @RequestMapping("/residents")
 public class ResidentListController {
 
-    private final ResidentListService residentListService;
+    private final ResidentListServiceImpl residentListService;
 
     @Autowired
-    public ResidentListController(ResidentListService residentListService) {
+    public ResidentListController(ResidentListServiceImpl residentListService) {
         this.residentListService = residentListService;
     }
 
@@ -51,7 +51,7 @@ public class ResidentListController {
         residentListService.deleteResident(serialNumber);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
-                .body("Resident with serial number " + serialNumber + " has been deleted successfully.");
+                .body(serialNumber + "deleted!");
     }
 
 }
