@@ -9,28 +9,40 @@
 <table>
     <thead>
     <tr>
-        <th>주민 식별 번호</th>
         <th>이름</th>
-        <th>주민번호</th>
-        <th>성별코드</th>
-        <th>출생일시</th>
-        <th>수정</th>
+        <th>주민등록등본</th>
+        <th>가족관계증명서</th>
+        <th>출생신고서</th>
+        <th>사망신고서</th>
+        <th>발급목록</th>
+        <th>삭제</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="resident : ${residents}">
-        <td th:text="${resident.residentSerialNumber}">Resident Serial Number</td>
+        <td th:text="${resident.name}">Resident Serial Number</td>
         <td th:text="${resident.name}">Name</td>
-        <td th:text="${resident.residentRegistrationNumber}">Resident Registration Number</td>
-        <td th:text="${resident.genderCode}">Gender</td>
-        <td th:text="${resident.birthDate}">Birth Date</td>
-        <td>
-            <a th:href="@{/residents/{id}/edit(id=${resident.residentSerialNumber})}">수정</a>
-        </td>
+        <td th:text="${resident.name}">Resident Registration Number</td>
+        <td th:text="${resident.name}">Gender</td>
+        <td th:text="${resident.name}">Birth Date</td>
+        <td th:text="${resident.name}">Birth Date</td>
+
+<!--        <td th:if="${resident.familyRelationCertificate}">-->
+<!--            <a th:href="@{/residents/{id}/family-relation}">가족관계증명서</a>-->
+<!--        </td>-->
+<!--        <td class="birth-certificate-column" th:if="${resident.birthCertificate}">-->
+<!--            <a th:href="@{/residents/{id}/birth-certificate}">출생신고서</a>-->
+<!--        </td>-->
+<!--        <td class="death-certificate-column" th:if="${resident.deathCertificate}">-->
+<!--            <a th:href="@{/residents/{id}/death-certificate}">사망신고서</a>-->
+<!--        </td>-->
+<!--        <td class="issue-list-column"><a th:href="@{/residents/{id}/issue-list}">발급목록</a></td>-->
+<!--        <td>-->
+<!--            <a th:href="@{/residents/{id}/delete(id=${resident.residentSerialNumber})}">삭제</a>-->
+<!--        </td>-->
     </tr>
     </tbody>
 </table>
 
-<a th:href="@{/residents/add}">등록</a>
 </body>
 </html>
