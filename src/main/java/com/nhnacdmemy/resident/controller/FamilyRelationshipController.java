@@ -47,7 +47,7 @@ public class FamilyRelationshipController {
     public ResponseEntity<Void> deleteFamilyRelationship(@PathVariable int baseSerialNumber, @PathVariable int familySerialNumber) {
         familyRelationshipService.deleteFamilyRelationship(baseSerialNumber, familySerialNumber);
         return ResponseEntity
-                .status(HttpStatus.NO_CONTENT) //요청을 성공적으로 처리했지만 응답할 데이터가 없음
+                .status(HttpStatus.NO_CONTENT) //요청을 성공적으로 처리했지만 응답할 데이터가 없음.
                 .build();
     }
 }
