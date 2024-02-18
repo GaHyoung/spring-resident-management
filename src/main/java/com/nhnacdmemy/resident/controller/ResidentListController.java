@@ -31,7 +31,7 @@ public class ResidentListController {
 
     //@RequestBody를 사용하여 요청 본문의 JSON 데이터를 Resident 객체로 매핑
     @PostMapping
-    public ResponseEntity<Resident> createResident(@RequestBody Resident resident) {
+    public ResponseEntity<Resident> saveResident(@RequestBody Resident resident) {
         Resident savedResident = residentListService.saveResident(resident);
         return ResponseEntity
                 .status(HttpStatus.CREATED)

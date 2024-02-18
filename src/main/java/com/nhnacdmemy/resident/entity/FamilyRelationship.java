@@ -1,9 +1,6 @@
 package com.nhnacdmemy.resident.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,7 +31,9 @@ public class FamilyRelationship {
      * */
     @Embeddable
     @EqualsAndHashCode
-    @NoArgsConstructor
+    @NoArgsConstructor @AllArgsConstructor
+    @Getter
+    @Setter
     public static class Pk implements Serializable{
         @Column(name = "family_resident_serial_number")
         private Integer familyResidentSerialNumber; //가족주민일련번호
