@@ -19,10 +19,12 @@ public class FamilyRelationshipServiceImpl implements FamilyRelationshipService 
     private final FamilyRelationshipRepository familyRelationshipRepository;
     private final ResidentRepository residentRepository;
 
+
     public FamilyRelationshipServiceImpl(FamilyRelationshipRepository familyRelationshipRepository, ResidentRepository residentRepository) {
         this.familyRelationshipRepository = familyRelationshipRepository;
         this.residentRepository = residentRepository;
     }
+
 
     @Override
     public List<FamilyRelationship> getAllFamilyRelationship(Integer serialNumber) {
@@ -39,9 +41,7 @@ public class FamilyRelationshipServiceImpl implements FamilyRelationshipService 
         familyRelationship.setResident(resident);
         familyRelationship.setFamilyRelationshipCode(familyRelationshipCode);
 
-        FamilyRelationship.Pk pk = new FamilyRelationship.Pk();
-        pk.setFamilyResidentSerialNumber(familySerialNumber);
-        pk.setBaseResidentSerialNumber(resident.getResidentSerialNumber());
+        FamilyRelationship.Pk pk = new FamilyRelationship.Pk(familySerialNumber, resident.getResidentSerialNumber());
         familyRelationship.setPk(pk);
         return familyRelationshipRepository.save(familyRelationship);
     }
@@ -58,12 +58,11 @@ public class FamilyRelationshipServiceImpl implements FamilyRelationshipService 
             throw new FamilyRelationshipNotFoundException();
         }
 
-        return familyRelationshipRepository.findById(new FamilyRelationship.Pk(baseSerialNumber, familySerialNumber))
+        return familyRelationshipRepository.findById(new FamilyRelationship.Pk(familySerialNumber,baseSerialNumber))
                 .orElseThrow(FamilyRelationshipNotFoundException::new);
     }
 
     @Override
-    @Transactional
     public void deleteFamilyRelationship(int baseSerialNumber, int familySerialNumber) {
 
         if(!familyRelationshipRepository.findById(new FamilyRelationship.Pk(baseSerialNumber, familySerialNumber)).isPresent()){
